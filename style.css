@@ -54,19 +54,24 @@ body {
 }
 
 .bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.bar-fill {
-  height: 14px;
+  position: relative;
+  margin: 10px 0;
+  height: 20px;
+  background-color: #eee;
   border-radius: 4px;
-  margin-right: 0.5rem;
+  overflow: hidden;
 }
 
 .bar-label {
-  font-size: 0.9rem;
-  white-space: nowrap;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
 }
+
 
