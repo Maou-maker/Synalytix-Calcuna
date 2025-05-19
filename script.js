@@ -3,10 +3,11 @@ const data = [];
 function addData() {
   const value = parseFloat(document.getElementById("valueInput").value);
   const color = document.getElementById("colorInput").value;
+  const label = document.getElementById("labelInput").value.trim() || "Tanpa Nama";
 
   if (isNaN(value) || value <= 0) return;
 
-  data.push({ value, color });
+  data.push({ label, value, color });
   renderChart();
 }
 
@@ -31,22 +32,22 @@ function renderChart() {
   barContainer.innerHTML = "";
 
   data.forEach(d => {
-    const barPercent = ((d.value / total) * 100).toFixed(1);
+  const barPercent = ((d.value / total) * 100).toFixed(1);
 
-    const bar = document.createElement("div");
-    bar.className = "bar";
+  const bar = document.createElement("div");
+  bar.className = "bar";
 
-    const fill = document.createElement("div");
-    fill.className = "bar-fill";
-    fill.style.width = `${barPercent}%`;
-    fill.style.backgroundColor = d.color;
+  const fill = document.createElement("div");
+  fill.className = "bar-fill";
+  fill.style.width = `${barPercent}%`;
+  fill.style.backgroundColor = d.color;
 
-    const label = document.createElement("div");
-    label.className = "bar-label";
-    label.textContent = `${barPercent}%`;
+  const label = document.createElement("div");
+  label.className = "bar-label";
+  label.innerHTML = `<strong>${d.label}:</strong> ${barPercent}%`;
 
-    bar.appendChild(fill);
-    bar.appendChild(label);
-    barContainer.appendChild(bar);
-  });
+  bar.appendChild(fill);
+  bar.appendChild(label);
+  barContainer.appendChild(bar);
+});
 }
