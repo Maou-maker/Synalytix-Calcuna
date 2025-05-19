@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 10px 20px;
+  text-align: right;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ccc;
+}
+
+.model-title {
+  font-weight: bold;
+  color: #444;
+  font-size: 18px;
+}
+
+.input-section {
+  margin: 20px;
+  text-align: center;
+}
+
+.input-section input,
+.input-section select,
+.input-section button {
+  margin: 0 5px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.output-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.circle-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.circle-container img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: transparent;
+  stroke: #eee;
+  stroke-width: 10;
+}
+
+.ring-progress {
+  fill: transparent;
+  stroke: #3b82f6;
+  stroke-width: 10;
+  stroke-dasharray: 439.82;
+  stroke-dashoffset: 439.82;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.percent-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+  width: 400px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  gap: 10px;
+}
+.bar {
+  width: 30px;
+  background-color: #60a5fa;
+  transition: height 0.5s ease;
+}
