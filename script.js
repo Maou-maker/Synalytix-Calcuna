@@ -1,30 +1,52 @@
-function renderResult() {
-  const percent = parseInt(document.getElementById('percentageInput').value) || 0;
-  const selectedCircle = document.getElementById('circleSelector').value;
-  const circleImg = document.getElementById('baseCircle');
-  const percentText = document.getElementById('percentText');
+const data = [];
 
-  // Set image src
-  circleImg.src = `assets/Color_${selectedCircle}.png`;
+function addData() {
+  const value = parseFloat(document.getElementById("valueInput").value);
+  const color = document.getElementById("colorInput").value;
 
-  // Update progress ring
-  const progressCircle = document.querySelector('.ring-progress');
-  const radius = progressCircle.r.baseVal.value;
+  if (isNaN(value) || value <= 0) return;
+
+  data.push({ value, color });
+  renderChart();
+}
+
+function renderChart() {
+  const total = data.reduce((sum, d) => sum + d.value, 0);
+  const latest = data[data.length - 1];
+  const percentage = ((latest.value / total) * 100).toFixed(1);
+
+  const circle = document.querySelector(".circle-fg");
+  const text = document.querySelector(".circle-text");
+
+  const radius = 60;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percent / 100) * circumference;
+  const offset = circumference * (1 - latest.value / total);
 
-  progressCircle.style.strokeDasharray = `${circumference}`;
-  progressCircle.style.strokeDashoffset = offset;
-  percentText.textContent = `${percent}%`;
+  circle.style.stroke = latest.color;
+  circle.setAttribute("stroke-dasharray", circumference);
+  circle.setAttribute("stroke-dashoffset", offset);
+  text.textContent = `${percentage}%`;
 
-  // Pastikan tidak menumpuk jika submit ulang
-  const barChart = document.getElementById('barChartContainer');
-  barChart.innerHTML = ''; // Bersihkan bar sebelumnya
+  const barContainer = document.getElementById("barChart");
+  barContainer.innerHTML = "";
 
-  for (let i = 1; i <= selectedCircle; i++) {
-    const bar = document.createElement('div');
-    bar.classList.add('bar');
-    bar.style.height = `${(percent / 100) * 100}px`;
-    barChart.appendChild(bar);
-  }
+  data.forEach(d => {
+    const barPercent = ((d.value / total) * 100).toFixed(1);
+
+    const bar = document.createElement("div");
+    bar.className = "bar";
+
+    const fill = document.createElement("div");
+    fill.className = "bar-fill";
+    fill.style.width = `${barPercent}%`;
+    fill.style.backgroundColor = d.color;
+
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.textContent = `${barPercent}%`;
+
+    bar.appendChild(fill);
+    bar.appendChild(label);
+    barContainer.appendChild(bar);
+  });
 }
