@@ -13,12 +13,13 @@ function renderResult() {
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percent / 100) * circumference;
 
+  progressCircle.style.strokeDasharray = `${circumference}`;
   progressCircle.style.strokeDashoffset = offset;
   percentText.textContent = `${percent}%`;
 
-  // Bar Chart Example
+  // Pastikan tidak menumpuk jika submit ulang
   const barChart = document.getElementById('barChartContainer');
-  barChart.innerHTML = ''; // Reset bars
+  barChart.innerHTML = ''; // Bersihkan bar sebelumnya
 
   for (let i = 1; i <= selectedCircle; i++) {
     const bar = document.createElement('div');

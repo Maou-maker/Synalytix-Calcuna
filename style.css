@@ -43,20 +43,27 @@ header {
   position: relative;
   width: 150px;
   height: 150px;
-}
-
-.circle-container img {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .progress-ring {
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotate(-90deg);
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 439.82;
+  stroke-dashoffset: 439.82;
+  transition: stroke-dashoffset 0.5s ease;
 }
 
 .ring-bg {
